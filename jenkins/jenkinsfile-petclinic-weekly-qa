@@ -61,9 +61,11 @@ pipeline {
         }
     }
     post {
-        script {
-                slackSend channel: '#class-chat', message: 'microservices weekly pipeline', teamDomain: 'devops14tr', tokenCredentialId: 'jenkins-slack'
-            }  
+        success {
+            script {
+                slackSend channel: '#class-chat', message: 'jenkinsfile-petclinic-weekly-qa', teamDomain: 'devops14tr', tokenCredentialId: 'jenkins-slack'
+            }       
+        }
         always {
             echo 'Deleting all local images'
             sh 'docker image prune -af'
